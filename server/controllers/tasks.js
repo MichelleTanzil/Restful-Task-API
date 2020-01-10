@@ -4,7 +4,10 @@ const Task = mongoose.model("Task");
 module.exports = {
   index: function(req, res) {
     Task.find()
-      .then(tasks => res.json(tasks))
+      .then(tasks => {
+        console.log(tasks)
+        res.json({"tasks": tasks})
+      })
       .catch(err => res.json(err));
   },
 
