@@ -2,9 +2,15 @@
 
 <div>
   <h1>All The Tasks: </h1>
-  <ul *ngFor="let task of tasks">
-    <li>{{task.title}} - {{task.description}}</li>
-  </ul>
+  <button class="btn btn-primary" (click)="getTasksFromService()">Get All Tasks</button>
+  <div *ngIf="tasks">
+    <ul *ngFor="let task of tasks">
+      <li>{{task.title}} - {{task.description}}</li>
+      <button class="btn btn-dark" (click)="getTaskFromService(task._id)">Show Me</button>
+    </ul>
+    <p *ngIf="currentTask">{{currentTask.title}} - {{currentTask.description}}</p>
+  </div>
   <h1>The Third Task</h1>
   <p *ngIf="oneTask">{{oneTask.title}} - {{oneTask.description}}</p>
 </div>
+<input type="text" (keyup)="onNewTaskKey($event)" name="idnumber">
