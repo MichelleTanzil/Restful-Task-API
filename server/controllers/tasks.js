@@ -5,8 +5,8 @@ module.exports = {
   index: function(req, res) {
     Task.find()
       .then(tasks => {
-        console.log(tasks)
-        res.json({"tasks": tasks})
+        console.log(tasks);
+        res.json({ tasks: tasks });
       })
       .catch(err => res.json(err));
   },
@@ -36,22 +36,23 @@ module.exports = {
   },
 
   update: function(req, res) {
-    console.log("task id: " + req.params.id);
-    Task.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        title: req.body.title,
-        description: req.body.description,
-        completed: req.body.completed,
-        updated_at: Date.now
-      }
-    );
+    console.log("update task id: " + req.params.id);
+    req.body.updated_at = Date.now();
+    Task.findOneAndUpdate({ _id: req.params.id }, { $set: req.body })
+      .then(task => res.json(task))
+      .catch(err => {
+        console.log("We have an error!", err);
+        for (var key in err.errors) {
+          req.flash("update_task", err.errors[key].message);
+        }
+        res.json(err);
+      });
   },
 
   delete: function(req, res) {
     console.log("task id: " + req.params.id);
     Task.remove({ _id: req.params.id })
-      .then(() => res.json({message: "Success"}))
+      .then(() => res.json({ message: "Success" }))
       .catch(err => res.json(err));
   }
 };
