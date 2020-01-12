@@ -26,7 +26,4 @@ const TaskSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-
-// create an object that contains methods for mongoose to interface with MongoDB
 const Task = mongoose.model("Task", TaskSchema);

@@ -17,12 +17,8 @@ export class AppComponent implements OnInit {
 
   constructor(private _httpService: HttpService) {}
   ngOnInit() {
-    // console.log("in it");
     this.newTask = { title: "", description: "" };
     this._httpService.getTasks().subscribe((data: any) => {
-      // this.tasks = data.tasks;
-      // console.log(this.tasks);
-      // this.getTasksFromService();
     });
   }
   getTasksFromService() {
@@ -43,9 +39,6 @@ export class AppComponent implements OnInit {
     });
   }
   onSubmitNewTask() {
-    // Code to send off the form data (this.newTask) to the Service
-    // ...
-    // Reset this.newTask to a new, clean object.
     let observable = this._httpService.createTask(this.newTask);
     observable.subscribe(newTask => {
       console.log("Got our new task!", newTask);
@@ -84,14 +77,5 @@ export class AppComponent implements OnInit {
     });
     this.getTasksFromService();
   }
-  // onNewTaskKey(event: any) {
-  //   console.log(`Click event is working with event param: ${event}`);
-  //   console.log(event);
-  //   this.stringID += event.key;
-  //   let observable = this._httpService.getTask(this.stringID);
-  //   observable.subscribe(data => {
-  //     console.log("Got our data!", data);
-  //     this.currentTask = data;
-  //   });
-  // }
+
 }
