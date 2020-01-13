@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     this._httpService.getTasks().subscribe((data: any) => {
     });
   }
-  getTasksFromService() {
+  getTasks() {
     let observable = this._httpService.getTasks();
     observable.subscribe((data: object) => {
       console.log("Got our data!", data);
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  getTaskFromService(id: string) {
+  getTask(id: string) {
     console.log(`Click event is working with event: ${id}`);
     let observable = this._httpService.getTask(id);
     observable.subscribe(data => {
@@ -44,9 +44,9 @@ export class AppComponent implements OnInit {
       console.log("Got our new task!", newTask);
     });
     this.newTask = { title: "", description: "" };
-    this.getTasksFromService();
+    this.getTasks();
   }
-  getTaskFromServiceUpdateTask(id: string) {
+  getTaskUpdateTask(id: string) {
     console.log(`Click event is working with event: ${id}`);
     let observable = this._httpService.getTask(id);
     observable.subscribe(data => {
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
       console.log("Got our update task!", updateTask);
     });
     this.updateTask = null;
-    this.getTasksFromService();
+    this.getTasks();
   }
 
   deleteTask(id: string) {
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
     observable.subscribe(data => {
       console.log("Got task to delete!", data);
     });
-    this.getTasksFromService();
+    this.getTasks();
   }
 
 }

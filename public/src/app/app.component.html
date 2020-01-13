@@ -1,18 +1,16 @@
 <h1>Restful Tasks API</h1>
-
 <div>
   <h1>All The Tasks: </h1>
-  <button class="btn btn-primary" (click)="getTasksFromService()">Get All Tasks</button>
+  <button class="btn btn-primary" (click)="getTasks()">Get All Tasks</button>
   <div *ngIf="tasks">
     <ul *ngFor="let task of tasks">
       <li>{{task.title}} - {{task.description}}</li>
-      <button class="btn btn-dark" (click)="getTaskFromService(task._id)">Show Me</button>
-      <button class="btn btn-primary" (click)="getTaskFromServiceUpdateTask(task._id)">Edit</button>
+      <button class="btn btn-dark" (click)="getTask(task._id)">Show Me</button>
+      <button class="btn btn-primary" (click)="getTaskUpdateTask(task._id)">Edit</button>
       <button class="btn btn-danger" (click)="deleteTask(task._id)">Delete</button>
     </ul>
-    <div>
-      <p *ngIf="currentTask">{{currentTask.title}} - {{currentTask.description}}</p>
-    </div>
+    <!-- <p *ngIf="currentTask">{{currentTask.title}} - {{currentTask.description}}</p> -->
+    <app-task *ngIf="currentTask" [taskToShow]='currentTask'></app-task>
 
     <div *ngIf="updateTask">
       <h1>Update Task: {{updateTask.title}}</h1>
@@ -31,7 +29,6 @@
         <button type="submit" class="btn btn-secondary">Update Task</button>
       </form>
     </div>
-
     <h1>Create New Task</h1>
     <form (submit)="onSubmitNewTask()">
       <!-- use the json pipe to see how newTask changes in real time -->
